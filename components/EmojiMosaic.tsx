@@ -28,16 +28,29 @@ export default function EmojiMosaic({ mosaic, gridSize = 128, backgroundColor = 
     gap: "1px",
     padding: "10px",
     borderRadius: "5px",
-    backgroundColor: newBgColor, // Set the background color for the mosaic
+    backgroundColor: newBgColor,
+    whiteSpace: "pre",
+  };
+
+  const handleCopy = () => {
+    const emojiString = mosaic.reduce((acc: string, cell: any, index: number) => {
+      acc += cell.emoji;
+      if ((index + 1) % gridSize === 0) {
+        acc += '\n'; // Add a newline character after each row
+      }
+      return acc;
+    }, '');
+    navigator.clipboard.writeText(emojiString.trim()); // Trim to remove any trailing newline
   };
 
   return (
     <div className="flex m-4 flex-col items-center justify-center">
       <div className="flex items-center">
         <label htmlFor="color" className="text-2xl">Change background color</label>
-      <input type="color" value={newBgColor} onChange={(e) => setNewBgColor(e.target.value)} className="rounded-md m-4 w-16 cursor-pointer"/>
+        <input type="color" value={newBgColor} onChange={(e) => setNewBgColor(e.target.value)} className="rounded-md m-4 w-16 cursor-pointer"/>
       </div>
-        <button className="bg-black px-4 py-3 rounded-md hover:text-gray-400 border-[1px] border-gray-400 m-4" onClick={handleDownload}>Download Mosaic</button>
+      <button className="bg-black px-4 py-3 rounded-md hover:text-gray-400 border-[1px] border-gray-400 m-4" onClick={handleDownload}>Download Mosaic</button>
+      <button className="bg-blue-500 px-4 py-3 rounded-md hover:text-gray-400 border-[1px] border-gray-400 m-4" onClick={handleCopy}>Copy Emojis</button>
       <div ref={mosaicRef} style={style} className="h-auto w-fit">
         {mosaic.map((cell: any, index: any) => (
           <div key={index} style={{ fontSize: "4px" }}>
