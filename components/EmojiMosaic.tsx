@@ -50,7 +50,7 @@ export default function EmojiMosaic({ mosaic, gridSize = 128, backgroundColor = 
         <input type="color" value={newBgColor} onChange={(e) => setNewBgColor(e.target.value)} className="rounded-md m-4 w-16 cursor-pointer"/>
       </div>
       <button className="bg-black px-4 py-3 rounded-md hover:text-gray-400 border-[1px] border-gray-400 m-4" onClick={handleDownload}>Download Mosaic</button>
-      <button className="bg-blue-500 px-4 py-3 rounded-md hover:text-gray-400 border-[1px] border-gray-400 m-4" onClick={handleCopy}>Copy Emojis</button>
+      <button className="bg-black px-4 py-3 rounded-md hover:text-gray-400 border-[1px] border-gray-400 m-4" onClick={handleCopy}>Copy Emojis</button>
       <div ref={mosaicRef} style={style} className="h-auto w-fit">
         {mosaic.map((cell: any, index: any) => (
           <div key={index} style={{ fontSize: "4px" }}>
